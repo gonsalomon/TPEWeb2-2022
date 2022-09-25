@@ -1,4 +1,10 @@
 <?php
+require_once 'controller/MuebleController.php';
+require_once 'controller/CategoriaController.php';
+
+$mc = new MuebleController();
+$cc = new CategoriaController();
+
 $action = 'home';
 
 if (!empty($_GET['action'])) {
