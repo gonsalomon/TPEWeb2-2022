@@ -40,7 +40,7 @@ class MuebleModel
 
     function deleteMueble($id_mueble)
     {
-        $sentence = $this->db->prepare("DELETE FROM mueble WHERE id_mueble=?");
+        $sentence = $this->db->prepare("DELETE FROM mueble WHERE id_mueble= ?");
         $sentence->execute(array($id_mueble));
     }
 }

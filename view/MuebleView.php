@@ -1,4 +1,7 @@
 <?php
-class MuebleView{
-    
+class MuebleView
+{
+    function __construct()
+    {
+    }
 }
