@@ -1,6 +1,6 @@
 <?php
-require_once '../model/MuebleModel.php';
-require_once '../view/MuebleView.php';
+require_once './model/MuebleModel.php';
+require_once './view/MuebleView.php';
 
 class MuebleController
 {
