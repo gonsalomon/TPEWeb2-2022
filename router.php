@@ -17,11 +17,20 @@ $params = explode('/', $action);
 
 switch ($params[0]) {
     case 'home':
-        echo 'Site under development, please wait for its deployment.';
+    case 'muebles':
+        $mc->mostrarMuebles();
         break;
-    case 'noticia':
+    case 'mueble':
+        if(!empty($params[1])){
+            $id=$params[1];
+            $mc->mostrarMueble($id);
+        }
         break;
-    case 'about':
+    case 'categoria':
+        if(!empty($params[1])){
+            $id=$params[1];
+            $cc->mostrarCategoria($id);
+        }
         break;
     default:
         echo ('404 Page not found');

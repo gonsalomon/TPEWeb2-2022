@@ -16,6 +16,12 @@ class MuebleController
     function mostrarMuebles()
     {
         $muebles = $this->model->getMuebles();
-        //ver qué onda el view
+        $this->view->mostrarMuebles($muebles);
+    }
+
+    function mostrarMueble($id)
+    {
+        $mueble = $this->model->getMueble($id);
+        $this->view->mostrarMueble($mueble);
     }
 }

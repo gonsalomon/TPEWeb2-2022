@@ -15,7 +15,13 @@ class CategoriaController
 
     function mostrarCategorias()
     {
-        $categorias = $this->model->getCategorias();
-        //ver qué onda el view x2
+        $muebles = $this->model->getCategorias();
+        $this->view->mostrarCategorias($muebles);
+    }
+
+    function mostrarCategoria($id)
+    {
+        $mueble = $this->model->getCategoria($id);
+        $this->view->mostrarCategoria($mueble);
     }
 }
