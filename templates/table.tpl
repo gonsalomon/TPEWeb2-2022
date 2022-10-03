@@ -21,7 +21,7 @@
                 <td>{$elem->descripcion}</td>
                 {if $presenting != 'categorias' && $presenting != 'categoria'}
                     <td>{$elem->precio}</td>
-                    {*<td>{$elem->categoria}</td> comentado hasta que agregue categorías en cada mueble*}
+                    <td>{$elem->nombre}</td>
                 {{/if}}
             </tr>
         {/foreach}

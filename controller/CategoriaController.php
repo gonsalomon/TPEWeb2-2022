@@ -1,5 +1,5 @@
 <?php
-require_once './model/CategoriaModel.php';
+require_once './model/MuebleModel.php';
 require_once './view/CategoriaView.php';
 
 class CategoriaController
@@ -9,7 +9,7 @@ class CategoriaController
 
     function __construct()
     {
-        $this->model = new CategoriaModel();
+        $this->model = new MuebleModel();
         $this->view = new CategoriaView();
     }
 

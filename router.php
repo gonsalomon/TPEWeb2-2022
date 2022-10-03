@@ -20,15 +20,18 @@ switch ($params[0]) {
     case 'muebles':
         $mc->mostrarMuebles();
         break;
+    case 'categorias':
+        $cc->mostrarCategorias();
+        break;
     case 'mueble':
-        if(!empty($params[1])){
-            $id=$params[1];
+        if (!empty($params[1])) {
+            $id = $params[1];
             $mc->mostrarMueble($id);
         }
         break;
     case 'categoria':
-        if(!empty($params[1])){
-            $id=$params[1];
+        if (!empty($params[1])) {
+            $id = $params[1];
             $cc->mostrarCategoria($id);
         }
         break;
