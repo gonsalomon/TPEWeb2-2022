@@ -1,11 +1,13 @@
 <?php
 require_once 'controller/MuebleController.php';
 require_once 'controller/CategoriaController.php';
+require_once 'controller/AuthController.php';
 
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
 $mc = new MuebleController();
 $cc = new CategoriaController();
+$auth = new AuthController();
 
 $action = 'home';
 
@@ -16,6 +18,9 @@ if (!empty($_GET['action'])) {
 $params = explode('/', $action);
 
 switch ($params[0]) {
+    case 'auth':
+        $auth->showAuth();
+        break;
     case 'home':
     case 'muebles':
         $mc->mostrarMuebles();
