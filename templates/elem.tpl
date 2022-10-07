@@ -1,30 +1,55 @@
 {include file='header.tpl'}
-<table>
-    <thead>
-        <tr>
-            <!-- uso el if para ver si es un mueble (lado N) o una categoria (lado 1) -->
-            {if $presenting != 'muebles' && $presenting != 'mueble'}
-                <td>Nombre</td>
-                <td>Descripción</td>
-            {else}
+{if $muebles}
+    {*tengo que mostrar una categoría sola, con sus muebles respectivos*}
+    <table>
+        <tr class=''>
+            <td>
+                <h4>{$data->categoria}</h4>
+            </td>
+            <td>
+                <p>{$data->detalles}</p>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <thead>
+            <tr>
                 <td>Nombre</td>
                 <td>Descripción</td>
                 <td>Precio</td>
-                {*<td>Categoría</td>*}
-            {/if}
-        </tr>
-    </thead>
-    <tbody>
-        {foreach $data as $elem}
-            <tr>
-                <td>{$elem->nombre}</td>
-                <td>{$elem->descripcion}</td>
-                {if $presenting == 'muebles' || $presenting == 'mueble'}
-                    <td>{$elem->precio}</td>
-                    {*<td>{$elem->categoria}</td>* comentado hasta que agregue categorías en cada mueble*}
-                {/if}
+                <td>Categoría</td>
             </tr>
-        {/foreach}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {foreach $muebles as $mueblito}
+                <tr>
+                    <td>{$mueblito->nombre}</td>
+                    <td>{$mueblito->descripcion}</td>
+                    <td>{$mueblito->precio}</td>
+                    <td>{$mueblito->categoria}</td>
+                </tr>
+            {/foreach}
+        </tbody>
+    </table>
+{else}
+    {*tengo que mostrar un mueble solo*}
+    <table>
+        <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Descripción</td>
+                <td>Precio</td>
+                <td>Categoría</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{$mueble->nombre}</td>
+                <td>{$mueble->descripcion}</td>
+                <td>{$mueble->precio}</td>
+                <td>{$mueble->categoria}</td>
+            </tr>
+        </tbody>
+    </table>
+{/if}
 {include file='footer.tpl'}

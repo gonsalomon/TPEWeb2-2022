@@ -25,8 +25,4 @@ class UserModel
 
         return $username;
     }
-
-    function handleRegister($user, $pass)
-    {
-    }
 }

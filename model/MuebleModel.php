@@ -37,9 +37,9 @@ class MuebleModel
 
     function getCategoria($id)
     {
-        $sentence = $this->db->prepare("SELECT * FROM categoria WHERE id__categoria = ?");
+        $sentence = $this->db->prepare("SELECT * FROM categoria WHERE id_categoria = ?");
         $sentence->execute(array($id));
-        $categoria = $sentence->fetchAll(PDO::FETCH_OBJ);
+        $categoria = $sentence->fetch(PDO::FETCH_OBJ);
 
         return $categoria;
     }

@@ -16,10 +16,11 @@ class CategoriaView
         $this->smarty->assign('presenting', 'categorias');
         $this->smarty->display('templates/table.tpl');
     }
-    function mostrarCategoria($categoria)
+    function mostrarCategoria($categoria, $muebles)
     {
-        $this->smarty->assign('title', $categoria->nombre);
+        $this->smarty->assign('title', $categoria->categoria);
         $this->smarty->assign('data', $categoria);
+        $this->smarty->assign('muebles', $muebles);
         $this->smarty->assign('presenting', 'categoria');
         $this->smarty->display('templates/elem.tpl');
     }

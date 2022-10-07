@@ -37,14 +37,12 @@ switch ($params[0]) {
         break;
     case 'mueble':
         if (!empty($params[1])) {
-            $id = $params[1];
-            $modelc->mostrarMueble($id);
+            $modelc->mostrarMueble($params[1]);
         }
         break;
     case 'categoria':
         if (!empty($params[1])) {
-            $id = $params[1];
-            $categoryc->mostrarCategoria($id);
+            $categoryc->mostrarCategoria($params[1]);
         }
         break;
     default:

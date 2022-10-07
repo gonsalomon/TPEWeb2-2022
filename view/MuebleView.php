@@ -18,7 +18,7 @@ class MuebleView
     }
     function mostrarMueble($mueble)
     {
-        $this->smarty->assign('title', $mueble[0]->nombre);
+        $this->smarty->assign('title', $mueble->nombre);
         $this->smarty->assign('data', $mueble);
         $this->smarty->assign('presenting', 'mueble');
         $this->smarty->display('templates/elem.tpl');

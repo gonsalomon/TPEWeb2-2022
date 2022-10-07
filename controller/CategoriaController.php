@@ -21,7 +21,7 @@ class CategoriaController
 
     function mostrarCategoria($id)
     {
-        $mueble = $this->model->getCategoria($id);
-        $this->view->mostrarCategoria($mueble);
+        $categoria = $this->model->getCategoria($id);
+        $this->view->mostrarCategoria($categoria, );
     }
 }
