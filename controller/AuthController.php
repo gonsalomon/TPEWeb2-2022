@@ -1,6 +1,5 @@
 <?php
 require_once './model/UserModel.php';
-require_once './view/AuthView.php';
 
 class AuthController
 {
@@ -11,28 +10,19 @@ class AuthController
     function __construct()
     {
         $this->model = new UserModel();
-        $this->view = new AuthView();
         $this->user = null;
     }
 
-    function showAuth()
+    function login()
     {
-        $this->view->showAuth();
-    }
-
-    function login($user, $pass)
-    {
-
-        $username = $this->model->getUsername($user);
-        if ($username && password_verify($pass, $username->password)) {
-
+        $username = $this->model->getUsername($_POST['user']);
+        //primero checkeo que el usuario exista, luego si coinciden las contraseñas
+        if ($username && password_verify($_POST['password'], $username->password)) {
             session_start();
             $_SESSION['id'] = $username->id;
             $_SESSION['user'] = $username->mail;
             header('Location: ' . BASE_URL);
-            die();
         } else {
-            $this->view->showAuth('Los datos son incorrectos, intente nuevamente.');
             die();
         }
     }

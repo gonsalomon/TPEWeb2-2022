@@ -19,19 +19,17 @@ $params = explode('/', $action);
 
 
 switch ($params[0]) {
-    case 'auth':
-        $authc->showAuth();
-        break;
-    case 'validate':
-        $authc->login($_POST['user'], $_POST['password']);
+        /*autenticación*/
+    case 'login':
+        $authc->login();
         break;
     case 'logout':
         $authc->logout();
         break;
     case 'home':
+        $modelc->mostrarMuebles();
+        break;
     case 'muebles':
-
-        checkLoggedIn();
         $modelc->mostrarMuebles();
         break;
     case 'categorias':
@@ -52,15 +50,4 @@ switch ($params[0]) {
     default:
         echo ('404 Page not found');
         break;
-}
-
-//verifica que el usuario esté logueado o lo redirecciona caso contrario
-function checkLoggedIn()
-{
-    session_start();
-    if (!isset($_SESSION['user']) || empty($_SESSION['user'])) {
-        session_destroy();
-        header('Location: ' . BASE_URL . 'auth');
-        die();
-    }
 }
