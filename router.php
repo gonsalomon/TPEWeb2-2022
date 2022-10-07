@@ -5,9 +5,9 @@ require_once 'controller/AuthController.php';
 
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
-$mc = new MuebleController();
-$cc = new CategoriaController();
-$auth = new AuthController();
+$modelc = new MuebleController();
+$categoryc = new CategoriaController();
+$authc = new AuthController();
 
 $action = 'home';
 
@@ -17,30 +17,50 @@ if (!empty($_GET['action'])) {
 
 $params = explode('/', $action);
 
+
 switch ($params[0]) {
     case 'auth':
-        $auth->showAuth();
+        $authc->showAuth();
+        break;
+    case 'validate':
+        $authc->login($_POST['user'], $_POST['password']);
+        break;
+    case 'logout':
+        $authc->logout();
         break;
     case 'home':
     case 'muebles':
-        $mc->mostrarMuebles();
+
+        checkLoggedIn();
+        $modelc->mostrarMuebles();
         break;
     case 'categorias':
-        $cc->mostrarCategorias();
+        $categoryc->mostrarCategorias();
         break;
     case 'mueble':
         if (!empty($params[1])) {
             $id = $params[1];
-            $mc->mostrarMueble($id);
+            $modelc->mostrarMueble($id);
         }
         break;
     case 'categoria':
         if (!empty($params[1])) {
             $id = $params[1];
-            $cc->mostrarCategoria($id);
+            $categoryc->mostrarCategoria($id);
         }
         break;
     default:
         echo ('404 Page not found');
         break;
+}
+
+//verifica que el usuario esté logueado o lo redirecciona caso contrario
+function checkLoggedIn()
+{
+    session_start();
+    if (!isset($_SESSION['user']) || empty($_SESSION['user'])) {
+        session_destroy();
+        header('Location: ' . BASE_URL . 'auth');
+        die();
+    }
 }

@@ -1,3 +1,4 @@
-<footer>
-    <p>Copyright fuera del acceso económico del alumno.</p>
-</footer>
+    <footer>
+        <p>Copyright fuera del acceso económico del alumno.</p>
+    </footer>
+</body>

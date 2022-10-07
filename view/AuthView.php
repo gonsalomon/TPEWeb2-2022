@@ -10,12 +10,10 @@ class AuthView
         $this->smarty->assign('BASE_URL', BASE_URL);
     }
 
-    function showAuth($err)
+    function showAuth($err = null)
     {
+        $this->smarty->assign('title', 'Iniciar sesión');
+        $this->smarty->assign('err', $err);
         $this->smarty->display('templates/auth.tpl');
-        if (isset($err) && !empty($err)) {
-            $this->smarty->assign('err', $err);
-            $this->smarty->display('templates/err.tpl');
-        }
     }
 }

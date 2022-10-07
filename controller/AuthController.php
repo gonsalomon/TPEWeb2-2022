@@ -1,33 +1,46 @@
 <?php
-require_once './model/AuthModel.php';
+require_once './model/UserModel.php';
 require_once './view/AuthView.php';
 
 class AuthController
 {
     private $model;
     private $view;
+    private $user;
+
     function __construct()
     {
-        $this->model = new AuthModel();
+        $this->model = new UserModel();
         $this->view = new AuthView();
+        $this->user = null;
     }
 
     function showAuth()
     {
-        //como en php no se puede identificar 2 métodos con el mismo nombre pero distinta signatura, toca pasar null
-        //después el mismo método se usa para mostrar un error, por eso la signatura es con 1 parámetro
-        $this->view->showAuth(null);
+        $this->view->showAuth();
     }
 
-    function handleLogin()
+    function login($user, $pass)
     {
-        $username = $_POST['username'];
-        $pass = $_POST['pass'];
 
-        $user = $this->model->getByUsername($username);
+        $username = $this->model->getUsername($user);
+        if ($username && password_verify($pass, $username->password)) {
 
-        if (isset($_SESSION['nombre']) && !empty($_SESSION['nombre'])) {
             session_start();
+            $_SESSION['id'] = $username->id;
+            $_SESSION['user'] = $username->mail;
+            header('Location: ' . BASE_URL);
+            die();
+        } else {
+            $this->view->showAuth('Los datos son incorrectos, intente nuevamente.');
+            die();
         }
+    }
+
+    function logout()
+    {
+        session_start();
+        session_destroy();
+        header('Location: ' . BASE_URL);
     }
 }
