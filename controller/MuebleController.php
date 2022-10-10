@@ -11,6 +11,9 @@ class MuebleController
     {
         $this->model = new MuebleModel();
         $this->view = new MuebleView();
+
+        //$authHelper = new AuthHelper();
+        //$authHelper->checkLoggedIn();
     }
 
     function mostrarMuebles()

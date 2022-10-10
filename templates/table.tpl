@@ -1,30 +1,33 @@
 {include file='header.tpl'}
-<h5>{$title}</h5>
-<table>
-    <thead>
-        <tr>
-            {if $presenting=='categorias'||$presenting=='categoria'}
-                <td>Categoría</td>
-                <td>Descripción</td>
-            {else}
-                <td>Mueble</td>
-                <td>Descripción</td>
-                <td>Precio</td>
-                <td>Categoría</td>
-            {/if}
-        </tr>
-    </thead>
-    <tbody>
-        {foreach $data as $elem}
+<section class="d-flex flex-column align-items-center justify-content-center justify-content-around border-bottom">
+    <h5>{$title}</h5>
+    <table>
+        <thead>
             <tr>
-                <td>{$elem->mueble}</td>
-                <td>{$elem->descripcion}</td>
-                {if $presenting != 'categorias' && $presenting != 'categoria'}
-                    <td>{$elem->precio}</td>
-                    <td><a href="categoria/{$elem->id_categoria}">{$elem->categoria}</a></td>
-                {{/if}}
+                {if $presenting=='categorias'||$presenting=='categoria'}
+                    <td>Categoría</td>
+                    <td>Descripción</td>
+                {else}
+                    <td><b>Mueble<b></td>
+                    <td><b>Descripción<b></td>
+                    <td><b>Precio<b></td>
+                    <td><b>Categoría<b></td>
+                {/if}
             </tr>
-        {/foreach}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {foreach $data as $elem}
+                <tr>
+                    <td>{$elem->mueble}</td>
+                    <td>{$elem->descripcion}</td>
+                    {if $presenting != 'categorias' && $presenting != 'categoria'}
+                        <td>{$elem->precio}</td>
+                        <td><a href="categoria/{$elem->id_categoria}">{$elem->categoria}</a></td>
+                    {{/if}}
+                </tr>
+            {/foreach}
+        </tbody>
+    </table>
+    <button onclick="history.go(-1);">Volver</button>
+</section>
 {include file='footer.tpl'}

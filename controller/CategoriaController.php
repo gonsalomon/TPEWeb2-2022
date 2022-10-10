@@ -1,6 +1,7 @@
 <?php
 require_once './model/MuebleModel.php';
 require_once './view/CategoriaView.php';
+require_once './helpers/AuthHelper.php';
 
 class CategoriaController
 {
@@ -11,6 +12,9 @@ class CategoriaController
     {
         $this->model = new MuebleModel();
         $this->view = new CategoriaView();
+
+        //$authHelper = new AuthHelper();
+        //$authHelper->checkLoggedIn();
     }
 
     function mostrarCategorias()
@@ -22,6 +26,7 @@ class CategoriaController
     function mostrarCategoria($id)
     {
         $categoria = $this->model->getCategoria($id);
-        $this->view->mostrarCategoria($categoria, );
+        $muebles = $this->model->getMueblesCat($id);
+        $this->view->mostrarCategoria($categoria, $muebles);
     }
 }
