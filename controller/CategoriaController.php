@@ -12,9 +12,6 @@ class CategoriaController
     {
         $this->model = new MuebleModel();
         $this->view = new CategoriaView();
-
-        //$authHelper = new AuthHelper();
-        //$authHelper->checkLoggedIn();
     }
 
     function mostrarCategorias()
@@ -23,10 +20,23 @@ class CategoriaController
         $this->view->mostrarCategorias($muebles);
     }
 
+    //para mostrar una categoría necesito antes obtener los muebles que le pertenecen (getMueblesCat)
     function mostrarCategoria($id)
     {
         $categoria = $this->model->getCategoria($id);
         $muebles = $this->model->getMueblesCat($id);
         $this->view->mostrarCategoria($categoria, $muebles);
+    }
+
+    function addCategoria($categoria, $detalles)
+    {
+        $data = $this->model->addCategoria($categoria, $detalles);
+        $this->view->mostrarCategoria($data[0], $data[1]);
+    }
+
+    function editCategoria($id_categoria, $categoria, $detalles)
+    {
+        $result = $this->model->updateCategoria($id_categoria, $categoria, $detalles);
+        $this->view->mostrarCategoria($result[0], $result[1]);
     }
 }

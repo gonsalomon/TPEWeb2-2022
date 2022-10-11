@@ -63,13 +63,19 @@ class MuebleModel
     function updateMueble($id_mueble, $nombre, $descripcion, $precio, $id_categoria)
     {
         $req = $this->db->prepare("UPDATE mueble SET nombre = ?, descripcion = ?, precio = ?, id_categoria=? WHERE id_mueble=?");
-        $req->execute(array($id_mueble, $nombre, $descripcion, $precio, $id_categoria));
+        return $req->execute(array($nombre, $descripcion, $precio, $id_categoria, $id_mueble));
     }
 
     function updateCategoria($id_categoria, $nombre, $descripcion)
     {
         $req = $this->db->prepare("UPDATE mueble SET nombre = ?, descripcion = ? WHERE id_categoria = ?");
         $req->execute(array($id_categoria, $nombre, $descripcion));
+        //ahora me hago un poquito de enrosque para poder mostrar la categoría recién editada, con sus respectivos muebles
+        $res = array();
+        $res[0] = $this->getCategoria($id_categoria);
+        $res[1] = $this->getMueblesCat($id_categoria);
+
+        return $res;
     }
 
     function deleteMueble($id_mueble)

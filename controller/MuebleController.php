@@ -11,20 +11,29 @@ class MuebleController
     {
         $this->model = new MuebleModel();
         $this->view = new MuebleView();
-
-        //$authHelper = new AuthHelper();
-        //$authHelper->checkLoggedIn();
     }
 
     function mostrarMuebles()
     {
-        $muebles = $this->model->getMuebles();
-        $this->view->mostrarMuebles($muebles);
+        $this->view->mostrarMuebles($this->model->getMuebles());
     }
 
     function mostrarMueble($id)
     {
-        $mueble = $this->model->getMueble($id);
-        $this->view->mostrarMueble($mueble);
+        $this->view->mostrarMueble($this->model->getMueble($id));
+    }
+
+    function addMueble($mueble, $descripcion, $precio, $id_categoria)
+    {
+        $this->view->mostrarMueble($this->model->addMueble($mueble, $descripcion, $precio, $id_categoria), true);
+    }
+
+    function editMueble($mueble, $descripcion, $precio, $id_categoria, $id_mueble)
+    {
+        $this->view->mostrarMueble($this->model->updateMueble($mueble, $descripcion, $precio, $id_categoria, $id_mueble));
+    }
+
+    function deleteMueble()
+    {
     }
 }

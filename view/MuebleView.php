@@ -19,10 +19,12 @@ class MuebleView
         $this->smarty->assign('presenting', 'muebles');
         $this->smarty->display('templates/table.tpl');
     }
-    function mostrarMueble($mueble)
+    function mostrarMueble($mueble, $added = null)
     {
         $this->smarty->assign('title', $mueble->mueble);
         $this->smarty->assign('mueble', $mueble);
+        if (isset($added))
+            $this->smarty->assign('added', true);
         $this->smarty->assign('presenting', 'mueble');
         $this->smarty->display('templates/elem.tpl');
     }
