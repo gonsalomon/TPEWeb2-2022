@@ -16,11 +16,11 @@ class CategoriaController
 
     function mostrarCategorias()
     {
-        $muebles = $this->model->getCategorias();
-        $this->view->mostrarCategorias($muebles);
+        $cat = $this->model->getCategorias();
+        $this->view->mostrarCategorias($cat);
     }
 
-    //para mostrar una categoría necesito antes obtener los muebles que le pertenecen (getMueblesCat)
+    //para mostrar una categoría individual necesito antes obtener los muebles que le pertenecen (getMueblesCat)
     function mostrarCategoria($id)
     {
         $categoria = $this->model->getCategoria($id);
@@ -36,7 +36,14 @@ class CategoriaController
 
     function editCategoria($id_categoria, $categoria, $detalles)
     {
-        $result = $this->model->updateCategoria($id_categoria, $categoria, $detalles);
-        $this->view->mostrarCategoria($result[0], $result[1]);
+        //uso res como un array para resolver la falta de capacidad de return múltiple
+        $res = $this->model->updateCategoria($id_categoria, $categoria, $detalles);
+        $this->view->mostrarCategoria($res[0], $res[1]);
+    }
+
+    function deleteCategoria($id_categoria)
+    {
+        $res = $this->model->deleteCategoria($id_categoria);
+        header(BASE_URL . "categorias/");
     }
 }

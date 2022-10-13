@@ -16,11 +16,24 @@ class AuthController
     function login()
     {
         $username = $this->model->getUsername($_POST['user']);
-        $this->helper->login($username);
+        if ($username && password_verify($_POST['password'], $username->password)) {
+            session_start();
+            $_SESSION['id'] = $username->id;
+            $_SESSION['user'] = $username->mail;
+            header('Location: ' . BASE_URL);
+            die();
+        } else {
+            session_start();
+            $_SESSION['err'] = 'Usuario o contraseña incorrectos';
+            header('Location: ' . BASE_URL);
+        }
     }
 
     function logout()
     {
-        $this->helper->logout();
+        session_start();
+        session_destroy();
+        header('Location: ' . BASE_URL);
+        die();
     }
 }

@@ -33,7 +33,9 @@ class MuebleController
         $this->view->mostrarMueble($this->model->updateMueble($mueble, $descripcion, $precio, $id_categoria, $id_mueble));
     }
 
-    function deleteMueble()
+    function deleteMueble($id)
     {
+        $req = $this->model->deleteMueble($id);
+        header(BASE_URL . "muebles/");
     }
 }
