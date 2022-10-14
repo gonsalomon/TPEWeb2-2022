@@ -31,6 +31,14 @@ class MuebleView
         if (isset($added))
             $this->smarty->assign('added', true);
         $this->smarty->assign('presenting', 'mueble');
+        //para evitar el notice
+        if (!isset($_SESSION))
+            session_start();
+        if (isset($_SESSION['user'])) {
+            $this->smarty->assign('user', $_SESSION['user']);
+        }
+        if (isset($_SESSION['err']))
+            $this->smarty->assign('err', $_SESSION['err']);
         $this->smarty->display('templates/elem.tpl');
     }
     function showHome()

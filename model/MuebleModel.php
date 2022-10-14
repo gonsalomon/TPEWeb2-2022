@@ -71,7 +71,7 @@ class MuebleModel
     {
         $req = $this->db->prepare("UPDATE mueble SET nombre = ?, descripcion = ? WHERE id_categoria = ?");
         $req->execute(array($id_categoria, $nombre, $descripcion));
-        //uso un array para devolver muebles y categoría recién modificados
+        //uso un array para devolver la categoría recién modificada con sus respectivos muebles
         $res = array();
         $res[0] = $this->getCategoria($id_categoria);
         $res[1] = $this->getMueblesCat($id_categoria);

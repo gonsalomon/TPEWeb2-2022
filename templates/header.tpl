@@ -22,10 +22,10 @@
             {if isset($user)}
                 <li>
                     <p>Bienvenido, {$user}!</p>
-                    <a href="logout">Logout({$user})</a>
+                    <a href="{BASE_URL}logout">Logout({$user})</a>
                 </li>
             {else}
-                <form method="POST" action='login'>
+                <form method="POST" action='{BASE_URL}login'>
                     <caption>
                         <h6>Ingresar</h6>
                     </caption>
