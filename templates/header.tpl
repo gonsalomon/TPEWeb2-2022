@@ -21,6 +21,7 @@
             </li>
             {if isset($user)}
                 <li>
+                    <p>Bienvenido, {$user}!</p>
                     <a href="logout">Logout({$user})</a>
                 </li>
             {else}

@@ -21,7 +21,6 @@ class AuthController
             $_SESSION['id'] = $username->id;
             $_SESSION['user'] = $username->mail;
             header('Location: ' . BASE_URL);
-            die();
         } else {
             session_start();
             $_SESSION['err'] = 'Usuario o contraseña incorrectos';

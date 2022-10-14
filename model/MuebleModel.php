@@ -7,7 +7,7 @@ class MuebleModel
     {
         $this->db = new PDO('mysql:host=localhost;' . 'dbname=db_mueble;charset=utf8', 'root', '');
     }
-    //super repetitivo todo, ya sé, abstraerlo sería mejor, pero ya es suficiente
+
     function getMuebles()
     {
         $req = $this->db->prepare("SELECT * FROM mueble LEFT JOIN categoria ON mueble.id_categoria = categoria.id_categoria");

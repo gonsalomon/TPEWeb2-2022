@@ -9,13 +9,18 @@ class MuebleView
         $this->smarty = new Smarty();
         $this->smarty->assign('BASE_URL', BASE_URL);
     }
-    function mostrarMuebles($muebles, $err = null)
+    function mostrarMuebles($muebles)
     {
         $this->smarty->assign('title', 'Lista de muebles');
         $this->smarty->assign('data', $muebles);
-        if (isset($_SESSION)) {
+        //para evitar el notice
+        if (!isset($_SESSION))
+            session_start();
+        if (isset($_SESSION['user'])) {
             $this->smarty->assign('user', $_SESSION['user']);
         }
+        if (isset($_SESSION['err']))
+            $this->smarty->assign('err', $_SESSION['err']);
         $this->smarty->assign('presenting', 'muebles');
         $this->smarty->display('templates/table.tpl');
     }

@@ -13,12 +13,13 @@ $authh = new AuthHelper();
 
 $action = 'home';
 
+
+
 if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 }
 
 $params = explode('/', $action);
-
 
 switch ($params[0]) {
         /*autenticación*/
@@ -28,6 +29,7 @@ switch ($params[0]) {
     case 'logout':
         $authc->logout();
         break;
+        /*sección pública*/
     case 'home':
         $modelc->mostrarMuebles();
         break;
@@ -47,7 +49,7 @@ switch ($params[0]) {
             $categoryc->mostrarCategoria($params[1]);
         }
         break;
-        //en respuesta al submit de un form
+        //acciones del admin
     case 'addMueble':
         $authh->checkLoggedIn();
         $modelc->addMueble($params['mueble'], $params['descripcion'], $params['precio'], $params['id_categoria']);
