@@ -35,6 +35,7 @@ class MuebleController
     {
         if ($id === null) {
             $this->view->mostrarMueble($this->model->updateMueble($_POST['id_mueble'], $_POST['mueble'], $_POST['descripcion'], $_POST['precio'], $_POST['id_categoria']));
+            header('Location: ' . BASE_URL);
         } else {
             $this->view->editarMueble($this->model->getMueble($id), $this->model->getCategorias());
         }

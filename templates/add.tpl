@@ -14,7 +14,7 @@
                 <option value={$categoria->id_categoria}>{$categoria->categoria}</option>
             {/foreach}
         </select>
-        <input type='submit'>
+        <button action='submit'>Actualizar</button>
     </form>
 {else if $action == 'mueble'}
     <form method='post' action='addMueble'>

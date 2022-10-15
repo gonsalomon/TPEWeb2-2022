@@ -7,12 +7,24 @@
                 {if $presenting=='categorias'||$presenting=='categoria'}
                     <td>Categoría</td>
                     <td>Descripción</td>
-                {else}
+                    {if isset($smarty.session.role) && $smarty.session.role == 'user'}
+                        <td>Editar
+                        <td>
+                        <td>Eliminar
+                        <td>
+                        {/if}
+                    {else}
                     <td><b>Mueble<b></td>
                     <td><b>Descripción<b></td>
                     <td><b>Precio<b></td>
                     <td><b>Categoría<b></td>
-                {/if}
+                    {if isset($smarty.session.role) && $smarty.session.role == 'user'}
+                        <td>Editar
+                        <td>
+                        <td>Eliminar
+                        <td>
+                        {/if}
+                    {/if}
             </tr>
         </thead>
         <tbody>
@@ -24,6 +36,14 @@
                         <td>{$elem->precio}</td>
                         <td><a href="categoria/{$elem->id_categoria}">{$elem->categoria}</a></td>
                     {{/if}}
+                    {if isset($smarty.session.role) && $smarty.session.role == 'user'}
+                        <td>
+                            <a href="{BASE_URL}editMueble/{$elem->id_mueble}">Ir</a>
+                        <td>
+                        <td>
+                            <a href="{BASE_URL}deleteMueble/{$elem->id_mueble}">Ir</a>
+                        <td>
+                    {/if}
                 </tr>
             {/foreach}
         </tbody>

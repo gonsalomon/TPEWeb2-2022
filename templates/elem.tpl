@@ -33,8 +33,8 @@
                         <td>{$mueblito->precio}</td>
                         <td><a href="{BASE_URL}mueble/{$mueblito->id_mueble}">Ver</a></td>
                         {if isset($smarty.session.role) && $smarty.session.role == 'user'}
-                            <td><a href="{BASE_URL}editMueble/{$mueble->id_mueble}">Editar</a></td>
-                            <td><a href="{BASE_URL}deleteMueble/{$mueble->id_mueble}">Eliminar</a></td>
+                            <td><a href="{BASE_URL}editMueble/{$mueblito->id_mueble}">Ir</a></td>
+                            <td><a href="{BASE_URL}deleteMueble/{$mueblito->id_mueble}">Ir</a></td>
                         {/if}
                     </tr>
                 {/foreach}
@@ -62,8 +62,8 @@
                     <td>{$mueble->precio}</td>
                     <td><a href="{BASE_URL}categoria/{$mueble->id_categoria}">{$mueble->categoria}</a></td>
                     {if isset($smarty.session.role) && $smarty.session.role == 'user'}
-                        <td><a href="{BASE_URL}editMueble/{$mueble->id_mueble}">Editar</a></td>
-                        <td><a href="{BASE_URL}deleteMueble/{$mueble->id_mueble}">Eliminar</a></td>
+                        <td><a href="{BASE_URL}editMueble/{$mueble->id_mueble}">Ir</a></td>
+                        <td><a href="{BASE_URL}deleteMueble/{$mueble->id_mueble}">Ir</a></td>
                     {/if}
                 </tr>
             </tbody>
