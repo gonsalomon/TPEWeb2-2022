@@ -20,6 +20,7 @@ class AuthController
             session_start();
             $_SESSION['id'] = $username->id;
             $_SESSION['user'] = $username->mail;
+            $_SESSION['role'] = 'user';
             header('Location: ' . BASE_URL);
         } else {
             session_start();

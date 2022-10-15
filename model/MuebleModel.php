@@ -50,7 +50,7 @@ class MuebleModel
 
     function addMueble($nombre, $descripcion, $precio, $id_categoria)
     {
-        $req = $this->db->prepare("INSERT INTO mueble(nombre, descripcion, precio, id_categoria) VALUES (?, ?, ?, ?)");
+        $req = $this->db->prepare("INSERT INTO mueble(mueble, descripcion, precio, id_categoria) VALUES (?, ?, ?, ?)");
         $req->execute(array($nombre, $descripcion, $precio, $id_categoria));
     }
 
@@ -60,10 +60,10 @@ class MuebleModel
         $req->execute(array($nombre, $descripcion));
     }
 
-    function updateMueble($id_mueble, $nombre, $descripcion, $precio, $id_categoria)
+    function updateMueble($id_mueble, $mueble, $descripcion, $precio, $id_categoria)
     {
         $req = $this->db->prepare("UPDATE mueble SET nombre = ?, descripcion = ?, precio = ?, id_categoria=? WHERE id_mueble=?");
-        $req->execute(array($nombre, $descripcion, $precio, $id_categoria, $id_mueble));
+        $req->execute(array($mueble, $descripcion, $precio, $id_categoria, $id_mueble));
         return $req->fetch(PDO::FETCH_OBJ);
     }
 

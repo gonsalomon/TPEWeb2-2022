@@ -4,11 +4,13 @@ require_once './libs/smarty-4.2.0/libs/Smarty.class.php';
 class CategoriaView
 {
     private $smarty;
+
     function __construct()
     {
         $this->smarty = new Smarty();
         $this->smarty->assign('BASE_URL', BASE_URL);
     }
+
     function mostrarCategorias($categorias)
     {
         $this->smarty->assign('title', 'Lista de categorías');
@@ -24,6 +26,7 @@ class CategoriaView
             $this->smarty->assign('err', $_SESSION['err']);
         $this->smarty->display('templates/table.tpl');
     }
+
     function mostrarCategoria($categoria, $muebles)
     {
         $this->smarty->assign('title', $categoria->categoria);

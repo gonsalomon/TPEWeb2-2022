@@ -30,25 +30,28 @@ class CategoriaController
         $this->view->mostrarCategoria($categoria, $muebles);
     }
 
-    function addCategoria($categoria, $detalles)
+    function addCategoria()
     {
-        $this->helper->checkLoggedIn();
-        $data = $this->model->addCategoria($categoria, $detalles);
+        $data = $this->model->addCategoria($_POST['categoria'], $_POST['detalles']);
+        //muestro la categoría recién añadida con sus respectivos muebles(es probable que no tenga ninguno)
         $this->view->mostrarCategoria($data[0], $data[1]);
     }
 
-    function editCategoria($id_categoria, $categoria, $detalles)
+    function editCategoria()
     {
-        $this->helper->checkLoggedIn();
-        //uso res como un array para resolver la falta de capacidad de return múltiple
-        $res = $this->model->updateCategoria($id_categoria, $categoria, $detalles);
+        $res = $this->model->updateCategoria($_POST['id_categoria'], $_POST['categoria'], $_POST['detalles']);
+        //muestro la categoría recién editada con sus respectivos muebles
         $this->view->mostrarCategoria($res[0], $res[1]);
     }
 
     function deleteCategoria($id_categoria)
     {
-        $this->helper->checkLoggedIn();
-        $res = $this->model->deleteCategoria($id_categoria);
-        header(BASE_URL . "categorias/");
+        if (null !== $this->model->getMueblesCat($id_categoria) || empty($this->model->getMueblesCat($id_categoria))) {
+            $_SESSION['err'] = 'No se puede borrar una categoría que ya tiene muebles. Intentar borrar los muebles primero, luego la categoría.';
+            header(BASE_URL . "categorias/");
+        } else {
+            $res = $this->model->deleteCategoria($id_categoria);
+            header(BASE_URL . "categorias/");
+        }
     }
 }

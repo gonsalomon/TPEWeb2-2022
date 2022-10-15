@@ -29,5 +29,9 @@
         </tbody>
     </table>
     <button onclick="history.go(-1);">Volver</button>
+    {if isset($smarty.session.role) && $smarty.session.role == 'user'}
+        <h5>Agregar un mueble</h5>
+        {include file='add.tpl'}
+    {/if}
 </section>
 {include file='footer.tpl'}

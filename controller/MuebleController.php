@@ -17,29 +17,31 @@ class MuebleController
 
     function mostrarMuebles()
     {
-        $this->view->mostrarMuebles($this->model->getMuebles());
+        $this->view->mostrarMuebles($this->model->getMuebles(), $this->model->getCategorias());
     }
 
     function mostrarMueble($id)
     {
-        $this->view->mostrarMueble($this->model->getMueble($id));
+        $this->view->mostrarMueble($this->model->getMueble($id), $this->model->getCategorias());
     }
 
-    function addMueble($mueble, $descripcion, $precio, $id_categoria)
+    function addMueble()
     {
-        $this->helper->checkLoggedIn();
-        $this->view->mostrarMueble($this->model->addMueble($mueble, $descripcion, $precio, $id_categoria), true);
+        $this->model->addMueble($_POST['mueble'], $_POST['descripcion'], $_POST['precio'], $_POST['id_categoria']);
+        $this->view->mostrarMuebles($this->model->getMuebles());
     }
 
-    function editMueble($mueble, $descripcion, $precio, $id_categoria, $id_mueble)
+    function editMueble($id = null)
     {
-        $this->helper->checkLoggedIn();
-        $this->view->mostrarMueble($this->model->updateMueble($mueble, $descripcion, $precio, $id_categoria, $id_mueble));
+        if ($id === null) {
+            $this->view->mostrarMueble($this->model->updateMueble($_POST['id_mueble'], $_POST['mueble'], $_POST['descripcion'], $_POST['precio'], $_POST['id_categoria']));
+        } else {
+            $this->view->editarMueble($this->model->getMueble($id), $this->model->getCategorias());
+        }
     }
 
     function deleteMueble($id)
     {
-        $this->helper->checkLoggedIn();
         $req = $this->model->deleteMueble($id);
         header(BASE_URL . "muebles/");
     }

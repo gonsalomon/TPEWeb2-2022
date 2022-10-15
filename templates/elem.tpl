@@ -19,6 +19,10 @@
                     <td>Descripción</td>
                     <td>Precio</td>
                     <td>Detalles</td>
+                    {if isset($smarty.session.role) && $smarty.session.role == 'user'}
+                        <td>Editar</td>
+                        <td>Eliminar</td>
+                    {/if}
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +32,10 @@
                         <td>{$mueblito->descripcion}</td>
                         <td>{$mueblito->precio}</td>
                         <td><a href="{BASE_URL}mueble/{$mueblito->id_mueble}">Ver</a></td>
+                        {if isset($smarty.session.role) && $smarty.session.role == 'user'}
+                            <td><a href="{BASE_URL}editMueble/{$mueble->id_mueble}">Editar</a></td>
+                            <td><a href="{BASE_URL}deleteMueble/{$mueble->id_mueble}">Eliminar</a></td>
+                        {/if}
                     </tr>
                 {/foreach}
             </tbody>
@@ -41,6 +49,10 @@
                     <td>Descripción</td>
                     <td>Precio</td>
                     <td>Categoría</td>
+                    {if isset($smarty.session.role) && $smarty.session.role == 'user'}
+                        <td>Editar</td>
+                        <td>Eliminar</td>
+                    {/if}
                 </tr>
             </thead>
             <tbody>
@@ -49,6 +61,10 @@
                     <td>{$mueble->descripcion}</td>
                     <td>{$mueble->precio}</td>
                     <td><a href="{BASE_URL}categoria/{$mueble->id_categoria}">{$mueble->categoria}</a></td>
+                    {if isset($smarty.session.role) && $smarty.session.role == 'user'}
+                        <td><a href="{BASE_URL}editMueble/{$mueble->id_mueble}">Editar</a></td>
+                        <td><a href="{BASE_URL}deleteMueble/{$mueble->id_mueble}">Eliminar</a></td>
+                    {/if}
                 </tr>
             </tbody>
         </table>
