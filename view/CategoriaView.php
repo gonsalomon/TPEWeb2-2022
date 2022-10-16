@@ -21,6 +21,7 @@ class CategoriaView
             session_start();
         if (isset($_SESSION['user'])) {
             $this->smarty->assign('user', $_SESSION['user']);
+            $this->smarty->assign('action', 'categoria');
         }
         if (isset($_SESSION['err']))
             $this->smarty->assign('err', $_SESSION['err']);
@@ -38,9 +39,25 @@ class CategoriaView
             session_start();
         if (isset($_SESSION['user'])) {
             $this->smarty->assign('user', $_SESSION['user']);
+            $this->smarty->assign('action', 'categoria');
         }
         if (isset($_SESSION['err']))
             $this->smarty->assign('err', $_SESSION['err']);
         $this->smarty->display('templates/elem.tpl');
+    }
+
+    function editarCategoria($categoria)
+    {
+        $this->smarty->assign('title', "Editar $categoria->categoria");
+        $this->smarty->assign('categoria', $categoria);
+        $this->smarty->assign('action', 'editCategoria');
+        //para evitar el notice
+        if (!isset($_SESSION))
+            session_start();
+        if (isset($_SESSION['user']))
+            $this->smarty->assign('user', $_SESSION['user']);
+        if (isset($_SESSION['err']))
+            $this->smarty->assign('err', $_SESSION['err']);
+        $this->smarty->display('templates/add.tpl');
     }
 }

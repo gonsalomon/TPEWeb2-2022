@@ -15,10 +15,10 @@
         <table>
             <thead>
                 <tr>
-                    <td>Nombre</td>
-                    <td>Descripción</td>
-                    <td>Precio</td>
-                    <td>Detalles</td>
+                    <td><b>Nombre</b></td>
+                    <td><b>Descripción</b></td>
+                    <td><b>Precio</b></td>
+                    <td><b>Detalles<b></td>
                     {if isset($smarty.session.role) && $smarty.session.role == 'user'}
                         <td>Editar</td>
                         <td>Eliminar</td>
@@ -32,6 +32,7 @@
                         <td>{$mueblito->descripcion}</td>
                         <td>{$mueblito->precio}</td>
                         <td><a href="{BASE_URL}mueble/{$mueblito->id_mueble}">Ver</a></td>
+                        {*las acciones de admin son sobre muebles*}
                         {if isset($smarty.session.role) && $smarty.session.role == 'user'}
                             <td><a href="{BASE_URL}editMueble/{$mueblito->id_mueble}">Ir</a></td>
                             <td><a href="{BASE_URL}deleteMueble/{$mueblito->id_mueble}">Ir</a></td>
@@ -45,10 +46,10 @@
         <table>
             <thead>
                 <tr>
-                    <td>Nombre</td>
-                    <td>Descripción</td>
-                    <td>Precio</td>
-                    <td>Categoría</td>
+                    <td><b>Nombre</b></td>
+                    <td><b>Descripción</b></td>
+                    <td><b>Precio</b></td>
+                    <td><b>Categoría</b></td>
                     {if isset($smarty.session.role) && $smarty.session.role == 'user'}
                         <td>Editar</td>
                         <td>Eliminar</td>
@@ -60,7 +61,7 @@
                     <td>{$mueble->mueble}</td>
                     <td>{$mueble->descripcion}</td>
                     <td>{$mueble->precio}</td>
-                    <td><a href="{BASE_URL}categoria/{$mueble->id_categoria}">{$mueble->categoria}</a></td>
+                    <td><a href="{BASE_URL}categoria/{$mueble->id_categoria}"><b><i>{$mueble->categoria}</i></b></a></td>
                     {if isset($smarty.session.role) && $smarty.session.role == 'user'}
                         <td><a href="{BASE_URL}editMueble/{$mueble->id_mueble}">Ir</a></td>
                         <td><a href="{BASE_URL}deleteMueble/{$mueble->id_mueble}">Ir</a></td>

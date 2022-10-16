@@ -60,19 +60,33 @@ switch ($params[0]) {
         $authh->checkLoggedIn();
         $categoryc->addCategoria();
         break;
+        //para la edición, con startEdit[elemento]() muestro el template con los valores del elemento
+        //en la base de datos, la clave foránea tiene cascade para que el edit de las categorías se refleje en los muebles
     case 'editMueble':
         $authh->checkLoggedIn();
-        $mueblec->editMueble($params[1]);
+        $mueblec->startEditMueble($params[1]);
+        break;
+    case 'confirmEditMueble':
+        $authh->checkLoggedIn();
+        $mueblec->confirmEditMueble();
         break;
     case 'editCategoria':
         $authh->checkLoggedIn();
-        $categoryc->editCategoria();
+        $categoryc->startEditCategoria($params[1]);
         break;
+    case 'confirmEditCategoria':
+        $authh->checkLoggedIn();
+        $categoryc->confirmEditCategoria();
+        break;
+        //para el borrado, el mueble (lado N) está sencillo; 
+        //con la categoría hago el checkeo dentro del controller si no hay muebles con esa categoría 
     case 'deleteMueble':
-
+        $authh->checkLoggedIn();
+        $mueblec->deleteMueble($params[1]);
         break;
     case 'deleteCategoria':
-
+        $authh->checkLoggedIn();
+        $categoryc->deleteCategoria($params[1]);
         break;
     default:
         echo ('404 Page not found');

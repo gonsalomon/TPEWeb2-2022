@@ -18,8 +18,7 @@ class CategoriaController
 
     function mostrarCategorias()
     {
-        $cat = $this->model->getCategorias();
-        $this->view->mostrarCategorias($cat);
+        $this->view->mostrarCategorias($this->model->getCategorias());
     }
 
     //para mostrar una categoría individual necesito antes obtener los muebles que le pertenecen (getMueblesCat)
@@ -30,14 +29,19 @@ class CategoriaController
         $this->view->mostrarCategoria($categoria, $muebles);
     }
 
+    //muestro la categoría recién añadida con sus respectivos muebles(es probable que no tenga ninguno)
     function addCategoria()
     {
         $data = $this->model->addCategoria($_POST['categoria'], $_POST['detalles']);
-        //muestro la categoría recién añadida con sus respectivos muebles(es probable que no tenga ninguno)
         $this->view->mostrarCategoria($data[0], $data[1]);
     }
 
-    function editCategoria()
+    function startEditCategoria($id)
+    {
+        $this->view->editarCategoria($this->model->getCategoria($id));
+    }
+
+    function confirmEditCategoria()
     {
         $res = $this->model->updateCategoria($_POST['id_categoria'], $_POST['categoria'], $_POST['detalles']);
         //muestro la categoría recién editada con sus respectivos muebles
@@ -46,12 +50,12 @@ class CategoriaController
 
     function deleteCategoria($id_categoria)
     {
-        if (null !== $this->model->getMueblesCat($id_categoria) || empty($this->model->getMueblesCat($id_categoria))) {
+        if (null !== $this->model->getMueblesCat($id_categoria) || !empty($this->model->getMueblesCat($id_categoria))) {
             $_SESSION['err'] = 'No se puede borrar una categoría que ya tiene muebles. Intentar borrar los muebles primero, luego la categoría.';
-            header(BASE_URL . "categorias/");
+            header("Location: " . BASE_URL . "categorias/");
         } else {
             $res = $this->model->deleteCategoria($id_categoria);
-            header(BASE_URL . "categorias/");
+            header("Location: " . BASE_URL . "categorias/");
         }
     }
 }

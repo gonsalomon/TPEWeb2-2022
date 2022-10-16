@@ -11,6 +11,11 @@
             ul li {
                 list-style: none;
             }
+
+            a {
+                text-decoration: none;
+                color: black;
+            }
         </style>
         <ul>
             <li>
@@ -22,7 +27,7 @@
             {if isset($user)}
                 <li>
                     <p>Bienvenido, {$user}!</p>
-                    <a href="{BASE_URL}logout">Logout({$user})</a>
+                    <a href="{BASE_URL}logout"><i>Logout({$user})</i></a>
                 </li>
             {else}
                 <form method="POST" action='{BASE_URL}login'>
@@ -36,8 +41,14 @@
                     <button type="submit">Ingresar</button>
                 </form>
                 {if isset($err)}
-                    <p class="alert alert-danger">{$err}</p>
+                    <p class="alert alert-danger">{$smarty.session.err}</p>
                 {/if}
             {/if}
         </ul>
-</header>
+    </header>
+    <nav>
+        <ul class='d-flex flex-row align-items-center justify-content-center justify-content-around border-bottom'>
+            <li><a href='{BASE_URL}muebles'><b>Todos los muebles</b></a></li>
+            <li><a href='{BASE_URL}categorias'><b>Todas las categorías</b></a></li>
+        </ul>
+</nav>
