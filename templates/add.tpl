@@ -1,7 +1,7 @@
 {if $action == 'edit'}
-    {include file='header.tpl'}
     <h3>Editar {$mueble->mueble}</h3>
     <form method='post' action='editMueble'>
+        <input hidden name='id_mueble' value={$mueble->id_mueble}>
         <label>Mueble</label>
         <input name='mueble' value={$mueble->mueble}>
         <label>Descripción</label>

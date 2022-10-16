@@ -62,10 +62,7 @@ switch ($params[0]) {
         break;
     case 'editMueble':
         $authh->checkLoggedIn();
-        if (!isset($params[1]))
-            $mueblec->editMueble();
-        else
-            $mueblec->editMueble($params[1]);
+        $mueblec->editMueble($params[1]);
         break;
     case 'editCategoria':
         $authh->checkLoggedIn();

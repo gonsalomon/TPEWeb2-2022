@@ -62,9 +62,12 @@ class MuebleModel
 
     function updateMueble($id_mueble, $mueble, $descripcion, $precio, $id_categoria)
     {
-        $req = $this->db->prepare("UPDATE mueble SET nombre = ?, descripcion = ?, precio = ?, id_categoria=? WHERE id_mueble=?");
+        $req = $this->db->prepare("UPDATE mueble SET mueble = ?, descripcion = ?, precio = ?, id_categoria=? WHERE id_mueble=?");
         $req->execute(array($mueble, $descripcion, $precio, $id_categoria, $id_mueble));
-        return $req->fetch(PDO::FETCH_OBJ);
+        $req->fetch(PDO::FETCH_OBJ);
+
+        $muebleUpdated = $this->getMueble($id_mueble);
+        return $muebleUpdated;
     }
 
     function updateCategoria($id_categoria, $nombre, $descripcion)
