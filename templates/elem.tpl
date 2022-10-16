@@ -70,6 +70,6 @@
             </tbody>
         </table>
     {/if}
-    <button onclick="history.go(-1);">Volver</button>
+    <button onclick="history.go(-1);">Página anterior</button>
 </section>
 {include file='footer.tpl'}

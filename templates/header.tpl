@@ -5,18 +5,20 @@
 </head>
 
 <body>
-    <header
-        class="d-flex flex-wrap align-items-center justify-content-center justify-content-around py-3  border-bottom">
-        <style>
-            ul li {
-                list-style: none;
-            }
+    <style>
+        ul li {
+            list-style: none;
+        }
 
-            a {
-                text-decoration: none;
-                color: black;
-            }
-        </style>
+        a {
+            text-decoration: none;
+        }
+
+        li>a {
+            color: white;
+        }
+    </style>
+    <header class="text-bg-dark d-flex flex-wrap align-items-center justify-content-center justify-content-around p-3">
         <ul>
             <li>
                 <h1>De buena madera</h1>
@@ -47,7 +49,8 @@
         </ul>
     </header>
     <nav>
-        <ul class='d-flex flex-row align-items-center justify-content-center justify-content-around border-bottom'>
+        <ul
+            class='navbar navbar-light bg-primary d-flex flex-row align-items-center justify-content-center justify-content-around border-bottom'>
             <li><a href='{BASE_URL}muebles'><b>Todos los muebles</b></a></li>
             <li><a href='{BASE_URL}categorias'><b>Todas las categorías</b></a></li>
         </ul>
