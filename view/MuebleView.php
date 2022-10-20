@@ -30,7 +30,8 @@ class MuebleView
     {
         $this->smarty->assign('title', $mueble->mueble);
         $this->smarty->assign('mueble', $mueble);
-        $this->smarty->assign('categorias', $categorias);
+        if (null !== $categorias)
+            $this->smarty->assign('categorias', $categorias);
         $this->smarty->assign('presenting', 'mueble');
         //para evitar el notice
         if (!isset($_SESSION))

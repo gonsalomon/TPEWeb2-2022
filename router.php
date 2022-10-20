@@ -1,4 +1,5 @@
 <?php
+//require_once 'libs/router.php';
 require_once 'controller/MuebleController.php';
 require_once 'controller/CategoriaController.php';
 require_once 'model/MuebleModel.php';
@@ -22,6 +23,11 @@ if (!empty($_GET['action'])) {
 }
 
 $params = explode('/', $action);
+
+//$router = new Router();
+
+//$router->addRoute('');
+//TODO: ver cómo se usa el addRoute (si es la tabla o qué va en el campo #1)
 
 switch ($params[0]) {
         /*autenticación*/
@@ -53,14 +59,12 @@ switch ($params[0]) {
         break;
         //acciones del admin
     case 'addMueble':
-        $authh->checkLoggedIn();
         $mueblec->addMueble();
         break;
     case 'addCategoria':
-        $authh->checkLoggedIn();
         $categoryc->addCategoria();
         break;
-        //para la edición, con startEdit[elemento]() muestro el template con los valores del elemento
+        //para la edición, con edit[elemento]() muestro el template con los valores del elemento
         //después confirmEdit dispara la acción una vez se submittea el form
     case 'editMueble':
         $mueblec->startEditMueble($params[1]);
