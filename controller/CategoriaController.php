@@ -7,13 +7,13 @@ class CategoriaController
 {
     private $model;
     private $view;
-    private $helper;
+    private $authh;
 
     function __construct()
     {
         $this->model = new MuebleModel();
         $this->view = new CategoriaView();
-        $this->helper = new AuthHelper();
+        $this->authh = new AuthHelper();
     }
 
     function mostrarCategorias()
@@ -32,17 +32,20 @@ class CategoriaController
     //muestro la categoría recién añadida con sus respectivos muebles(es probable que no tenga ninguno)
     function addCategoria()
     {
+        $this->authh->checkLoggedIn();
         $data = $this->model->addCategoria($_POST['categoria'], $_POST['detalles']);
         $this->view->mostrarCategoria($data[0], $data[1]);
     }
 
     function startEditCategoria($id)
     {
+        $this->authh->checkLoggedIn();
         $this->view->editarCategoria($this->model->getCategoria($id));
     }
 
     function confirmEditCategoria()
     {
+        $this->authh->checkLoggedIn();
         $res = $this->model->updateCategoria($_POST['id_categoria'], $_POST['categoria'], $_POST['detalles']);
         //muestro la categoría recién editada con sus respectivos muebles
         $this->view->mostrarCategoria($res[0], $res[1]);
@@ -50,6 +53,7 @@ class CategoriaController
 
     function deleteCategoria($id_categoria)
     {
+        $this->authh->checkLoggedIn();
         if (null !== $this->model->getMueblesCat($id_categoria) || !empty($this->model->getMueblesCat($id_categoria))) {
             $_SESSION['err'] = 'No se puede borrar una categoría que ya tiene muebles. Intentar borrar los muebles primero, luego la categoría.';
             header("Location: " . BASE_URL . "categorias/");

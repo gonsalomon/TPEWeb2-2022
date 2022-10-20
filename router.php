@@ -63,29 +63,24 @@ switch ($params[0]) {
         //para la edición, con startEdit[elemento]() muestro el template con los valores del elemento
         //después confirmEdit dispara la acción una vez se submittea el form
     case 'editMueble':
-        $authh->checkLoggedIn();
         $mueblec->startEditMueble($params[1]);
         break;
     case 'confirmEditMueble':
-        $authh->checkLoggedIn();
         $mueblec->confirmEditMueble();
         break;
     case 'editCategoria':
-        $authh->checkLoggedIn();
         $categoryc->startEditCategoria($params[1]);
         break;
     case 'confirmEditCategoria':
-        $authh->checkLoggedIn();
         $categoryc->confirmEditCategoria();
         break;
         //para el borrado, el mueble (lado N) está sencillo; 
-        //con la categoría hago el checkeo dentro del controller si no hay muebles con esa categoría 
+        //con la categoría hago el checkeo dentro del controller si no hay muebles con esa categoría
+        //TODO  
     case 'deleteMueble':
-        $authh->checkLoggedIn();
         $mueblec->deleteMueble($params[1]);
         break;
     case 'deleteCategoria':
-        $authh->checkLoggedIn();
         $categoryc->deleteCategoria($params[1]);
         break;
     default:
