@@ -61,7 +61,7 @@ switch ($params[0]) {
         $categoryc->addCategoria();
         break;
         //para la edición, con startEdit[elemento]() muestro el template con los valores del elemento
-        //en la base de datos, la clave foránea tiene cascade para que el edit de las categorías se refleje en los muebles
+        //después confirmEdit dispara la acción una vez se submittea el form
     case 'editMueble':
         $authh->checkLoggedIn();
         $mueblec->startEditMueble($params[1]);
