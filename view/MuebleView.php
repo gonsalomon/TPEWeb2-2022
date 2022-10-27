@@ -15,15 +15,16 @@ class MuebleView
         $this->smarty->assign('data', $muebles);
         $this->smarty->assign('categorias', $categorias);
         $this->smarty->assign('presenting', 'muebles');
-        //para evitar el notice
+        //para evitar el notice de un $_SESSION sin setear
         if (!isset($_SESSION))
             session_start();
         if (isset($_SESSION['user'])) {
             $this->smarty->assign('user', $_SESSION['user']);
             $this->smarty->assign('action', 'mueble');
         }
-        if (isset($_SESSION['err']))
+        if (isset($_SESSION['err'])) {
             $this->smarty->assign('err', $_SESSION['err']);
+        }
         $this->smarty->display('templates/table.tpl');
     }
     function mostrarMueble($mueble, $categorias = null)
@@ -40,8 +41,9 @@ class MuebleView
             $this->smarty->assign('user', $_SESSION['user']);
             $this->smarty->assign('action', 'mueble');
         }
-        if (isset($_SESSION['err']))
+        if (isset($_SESSION['err'])) {
             $this->smarty->assign('err', $_SESSION['err']);
+        }
         $this->smarty->display('templates/elem.tpl');
     }
 
@@ -56,8 +58,9 @@ class MuebleView
             session_start();
         if (isset($_SESSION['user']))
             $this->smarty->assign('user', $_SESSION['user']);
-        if (isset($_SESSION['err']))
+        if (isset($_SESSION['err'])) {
             $this->smarty->assign('err', $_SESSION['err']);
+        }
         $this->smarty->display('templates/add.tpl');
     }
 }

@@ -18,12 +18,18 @@ class CategoriaController
 
     function mostrarCategorias()
     {
+        if (isset($_SESSION['err']) && $_SESSION['err'] != 'Debe iniciar sesión para acceder a esta acción.') {
+            $_SESSION['err'] = null;
+        }
         $this->view->mostrarCategorias($this->model->getCategorias());
     }
 
     //para mostrar una categoría individual necesito antes obtener los muebles que le pertenecen (getMueblesCat)
     function mostrarCategoria($id)
     {
+        if (isset($_SESSION['err']) && $_SESSION['err'] != 'Debe iniciar sesión para acceder a esta acción.') {
+            $_SESSION['err'] = null;
+        }
         $categoria = $this->model->getCategoria($id);
         $muebles = $this->model->getMueblesCat($id);
         $this->view->mostrarCategoria($categoria, $muebles);
@@ -32,6 +38,9 @@ class CategoriaController
     //muestro la categoría recién añadida con sus respectivos muebles(es probable que no tenga ninguno)
     function addCategoria()
     {
+        if (isset($_SESSION['err']) && $_SESSION['err'] != 'Debe iniciar sesión para acceder a esta acción.') {
+            $_SESSION['err'] = null;
+        }
         $this->authh->checkLoggedIn();
         $data = $this->model->addCategoria($_POST['categoria'], $_POST['detalles']);
         $this->view->mostrarCategoria($data[0], $data[1]);
@@ -39,12 +48,18 @@ class CategoriaController
 
     function startEditCategoria($id)
     {
+        if (isset($_SESSION['err']) && $_SESSION['err'] != 'Debe iniciar sesión para acceder a esta acción.') {
+            $_SESSION['err'] = null;
+        }
         $this->authh->checkLoggedIn();
         $this->view->editarCategoria($this->model->getCategoria($id));
     }
 
     function confirmEditCategoria()
     {
+        if (isset($_SESSION['err']) && $_SESSION['err'] != 'Debe iniciar sesión para acceder a esta acción.') {
+            $_SESSION['err'] = null;
+        }
         $this->authh->checkLoggedIn();
         $res = $this->model->updateCategoria($_POST['id_categoria'], $_POST['categoria'], $_POST['detalles']);
         //muestro la categoría recién editada con sus respectivos muebles
@@ -53,6 +68,9 @@ class CategoriaController
 
     function deleteCategoria($id_categoria)
     {
+        if (isset($_SESSION['err']) && $_SESSION['err'] != 'Debe iniciar sesión para acceder a esta acción.') {
+            $_SESSION['err'] = null;
+        }
         $this->authh->checkLoggedIn();
         if (null !== $this->model->getMueblesCat($id_categoria) || !empty($this->model->getMueblesCat($id_categoria))) {
             $_SESSION['err'] = 'No se puede borrar una categoría que ya tiene muebles. Intentar borrar los muebles primero, luego la categoría.';

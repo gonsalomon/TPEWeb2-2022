@@ -17,12 +17,12 @@ class UserModel
         return null;
     }
 
-    function getUsername($user)
+    function getUser($user)
     {
         $req = $this->db->prepare('SELECT * from user WHERE mail = ?');
         $req->execute(array($user));
-        $username = $req->fetch(PDO::FETCH_OBJ);
+        $userData = $req->fetch(PDO::FETCH_OBJ);
 
-        return $username;
+        return $userData;
     }
 }

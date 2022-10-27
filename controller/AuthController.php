@@ -15,12 +15,12 @@ class AuthController
 
     function login()
     {
-        $username = $this->model->getUsername($_POST['user']);
-        if ($username && password_verify($_POST['password'], $username->password)) {
+        $user = $this->model->getUser($_POST['user']);
+        if ($user && password_verify($_POST['password'], $user->password)) {
             session_start();
-            $_SESSION['id'] = $username->id;
-            $_SESSION['user'] = $username->mail;
-            $_SESSION['role'] = 'user';
+            $_SESSION['id'] = $user->id;
+            $_SESSION['user'] = $user->mail;
+            $_SESSION['role'] = $user->role;
             header('Location: ' . BASE_URL);
         } else {
             session_start();

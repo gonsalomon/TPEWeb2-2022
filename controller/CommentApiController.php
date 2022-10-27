@@ -13,42 +13,48 @@ class CommentApiController extends ApiController
     function getComments()
     {
         $comments = $this->model->getComments();
-        !empty($comments) ? $this->view->response($comments, 200) : $this->view->response(null, 404);
+        !empty($comments) ? $this->view->response($comments, 200) : $this->view->response('No hay comentarios para este elemento.', 404);
     }
 
     function getComment($params = null)
     {
         $id = $params[':ID'];
-        $comment = $this->model->getComment($id);
-
-        $comment ? $this->view->response($comment, 200) : $this->view->response(null, 404);
+        if (isset($id)) {
+            $comment = $this->model->getComment($id);
+            $comment ? $this->view->response($comment, 200) : $this->view->response('No se encontró el comentario solicitado.', 404);
+        } else {
+            $this->view->response('No se encontró el comentario solicitado.', 404);
+        }
     }
 
     function addComment($params = [])
     {
         $body = $this->getData();
-
         if ((empty($body->id_mueble) && empty($body->id_categoria)) || empty($body->comment))
-            $this->view->response('Datos insuficientes', 400);
+            $this->view->response('Datos insuficientes, intente de nuevo completando todos.', 400);
+        else {
+            if (isset($body->id_categoria))
+                $id_categoria = $body->id_categoria;
+            if (isset($body->id_mueble))
+                $id_mueble = $body->id_mueble;
+            $comment = $body->comment;
 
-        if (isset($body->id_categoria))
-            $id_categoria = $body->id_categoria;
-        if (isset($body->id_mueble))
-            $id_mueble = $body->id_mueble;
-        $comment = $body->comment;
-
-        $res = $this->model->addComment((isset($id_mueble) ? $id_mueble : $id_categoria), $comment);
+            $res = $this->model->addComment((isset($id_mueble) ? $id_mueble : $id_categoria), $comment);
+            $this->getComments();
+        }
     }
 
     function deleteComment($params = null)
     {
         $id = $params[':ID'];
-        $comment = $this->model->getComment($id);
-        if ($comment) {
-            $this->model->deleteComment($id);
-            $this->view->response($comment, 200);
-        } else {
-            $this->view->response(null, 404);
-        }
+        if (isset($id)) {
+            $comment = $this->model->getComment($id);
+            if ($comment) {
+                $this->model->deleteComment($id);
+                $this->view->response($comment, 200);
+            } else
+                $this->view->response('No se encontró el comentario solicitado.', 404);
+        } else
+            $this->view->response('Debe indicar qué comentario va a borrar', 400);
     }
 }

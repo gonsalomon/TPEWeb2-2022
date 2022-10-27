@@ -30,6 +30,9 @@
                 <li>
                     <p>Bienvenido, {$user}!</p>
                     <a href="{BASE_URL}logout"><i>Logout({$user})</i></a>
+                    {if isset($smarty.session.err)}
+                        <p class="alert alert-danger">{$smarty.session.err}</p>
+                    {/if}
                 </li>
             {else}
                 <form method="POST" action='{BASE_URL}login'>
@@ -42,7 +45,7 @@
                     <input type='password' name='password' />
                     <button type="submit">Ingresar</button>
                 </form>
-                {if isset($err)}
+                {if isset($smarty.session.err)}
                     <p class="alert alert-danger">{$smarty.session.err}</p>
                 {/if}
             {/if}

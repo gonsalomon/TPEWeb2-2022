@@ -1,5 +1,5 @@
 {*el formulario de add se usa tanto para agregar un elemento como para editarlo, controlado desde view mediante $action*}
-{if (isset($smarty.session.role) && $smarty.session.role == 'user')}
+{if (isset($smarty.session.role) && $smarty.session.role == 'admin')}
     {if $action == 'editMueble'}
         {include file='header.tpl'}
         <section class="d-flex flex-column align-items-center justify-content-center">
@@ -54,7 +54,7 @@
             </select>
             <button action='submit'>Enviar</button>
         </form>
-    {else if action == 'categoria'}
+    {else if $action == 'categoria'}
         <h4>Agregar una categoría</h4>
         <form method='post' action='{BASE_URL}addCategoria' class="d-flex flex-column">
             <label>Categoría</label>

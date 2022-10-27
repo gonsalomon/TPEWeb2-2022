@@ -7,7 +7,6 @@
                 {if $presenting=='categorias'||$presenting=='categoria'}
                     <td><b>Categoría</b></td>
                     <td><b>Descripción</b></td>
-
                 {else}
                     <td><b>Mueble<b></td>
                     <td><b>Descripción<b></td>
@@ -15,7 +14,7 @@
                     <td><b>Categoría<b></td>
                     <td><b>Detalles</b></td>
                 {/if}
-                {if isset($smarty.session.role) && $smarty.session.role == 'user'}
+                {if isset($smarty.session.role) && $smarty.session.role == 'admin'}
                     <td>Editar
                     <td>
                     <td>Eliminar
@@ -39,7 +38,7 @@
                         <td><a href="{BASE_URL}mueble/{$elem->id_mueble}"><b>Ver</b></a></td>
                     {/if}
                     {*primero, reviso si estoy logueado (para mostrar acciones de admin)*}
-                    {if isset($smarty.session.role) && $smarty.session.role == 'user'}
+                    {if isset($smarty.session.role) && $smarty.session.role == 'admin'}
                         {*segundo, qué estoy presentando (para tener bien el href)*}
                         {if $presenting == 'mueble'||$presenting == 'muebles'}
                             <td>

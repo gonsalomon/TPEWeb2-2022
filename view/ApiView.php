@@ -13,6 +13,7 @@ class ApiView
     {
         $status = array(
             200 => 'OK',
+            400 => 'Bad Request',
             404 => 'Not found',
             500 => 'Internal Server Error'
         );

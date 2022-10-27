@@ -9,6 +9,7 @@ abstract class ApiController
 
     function __construct()
     {
+        $this->model = new ApiModel();
         $this->view = new ApiView();
         $this->data = file_get_contents('php://input');
     }
