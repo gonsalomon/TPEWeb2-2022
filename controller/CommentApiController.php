@@ -10,20 +10,26 @@ class CommentApiController extends ApiController
         $this->model = new ApiModel();
     }
 
-    function getComments()
+    //orderBy va a traer un string con el campo por el que quieren ordenar, order (también string) define si es 'ascending' o 'descending'
+    function getComments($params = null, $orderBy = null, $order = null)
     {
-        $comments = $this->model->getComments();
+        $elem = $params['elem'];
+        $id = $params['id'];
+        if (isset($orderBy)) {
+            $comments = $this->model->getComments($elem, $id, $orderBy, $order);
+        } else
+            $comments = $this->model->getComments($elem, $id);
         !empty($comments) ? $this->view->response($comments, 200) : $this->view->response('No hay comentarios para este elemento.', 404);
     }
 
-    function getComment($params = null)
+    function getComment($params = null,)
     {
         $id = $params[':ID'];
         if (isset($id)) {
             $comment = $this->model->getComment($id);
             $comment ? $this->view->response($comment, 200) : $this->view->response('No se encontró el comentario solicitado.', 404);
         } else {
-            $this->view->response('No se encontró el comentario solicitado.', 404);
+            $this->view->response('No se solicitó un comentario.', 400);
         }
     }
 
@@ -39,7 +45,7 @@ class CommentApiController extends ApiController
                 $id_mueble = $body->id_mueble;
             $comment = $body->comment;
 
-            $res = $this->model->addComment((isset($id_mueble) ? $id_mueble : $id_categoria), $comment);
+            $res = $this->model->addComment((isset($id_mueble) ? $id_mueble : $id_categoria), $comment, isset($id_mueble) ? 'mueble' : 'categoria');
             $this->getComments();
         }
     }

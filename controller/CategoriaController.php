@@ -27,7 +27,7 @@ class CategoriaController
     //para mostrar una categoría individual necesito antes obtener los muebles que le pertenecen (getMueblesCat)
     function mostrarCategoria($id)
     {
-        if (isset($_SESSION['err']) && $_SESSION['err'] != 'Debe iniciar sesión para acceder a esta acción.') {
+        if (isset($_SESSION['err']) && $_SESSION['err'] == 'Debe iniciar sesión para acceder a esta acción.') {
             $_SESSION['err'] = null;
         }
         $categoria = $this->model->getCategoria($id);
@@ -38,7 +38,7 @@ class CategoriaController
     //muestro la categoría recién añadida con sus respectivos muebles(es probable que no tenga ninguno)
     function addCategoria()
     {
-        if (isset($_SESSION['err']) && $_SESSION['err'] != 'Debe iniciar sesión para acceder a esta acción.') {
+        if (isset($_SESSION['err']) && $_SESSION['err'] == 'Debe iniciar sesión para acceder a esta acción.') {
             $_SESSION['err'] = null;
         }
         $this->authh->checkLoggedIn();
@@ -48,7 +48,7 @@ class CategoriaController
 
     function startEditCategoria($id)
     {
-        if (isset($_SESSION['err']) && $_SESSION['err'] != 'Debe iniciar sesión para acceder a esta acción.') {
+        if (isset($_SESSION['err']) && $_SESSION['err'] == 'Debe iniciar sesión para acceder a esta acción.') {
             $_SESSION['err'] = null;
         }
         $this->authh->checkLoggedIn();
@@ -57,7 +57,7 @@ class CategoriaController
 
     function confirmEditCategoria()
     {
-        if (isset($_SESSION['err']) && $_SESSION['err'] != 'Debe iniciar sesión para acceder a esta acción.') {
+        if (isset($_SESSION['err']) && $_SESSION['err'] == 'Debe iniciar sesión para acceder a esta acción.') {
             $_SESSION['err'] = null;
         }
         $this->authh->checkLoggedIn();
@@ -68,7 +68,7 @@ class CategoriaController
 
     function deleteCategoria($id_categoria)
     {
-        if (isset($_SESSION['err']) && $_SESSION['err'] != 'Debe iniciar sesión para acceder a esta acción.') {
+        if (isset($_SESSION['err']) && $_SESSION['err'] == 'Debe iniciar sesión para acceder a esta acción.') {
             $_SESSION['err'] = null;
         }
         $this->authh->checkLoggedIn();
