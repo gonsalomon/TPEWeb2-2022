@@ -10,19 +10,40 @@ class ApiModel
 
     function getComments($elem, $id, $orderBy = null, $order = null)
     {
-        if ($elem == 'mueble') {
-            $this->db->prepare('SELECT ');
+        if (!isset($orderBy)) {
+            if ($elem == 'mueble') {
+                $req = $this->db->prepare('SELECT * from comments WHERE id_mueble = ?');
+                $req->execute($id);
+
+                return $req->fetchAll(PDO::FETCH_OBJ);
+            } else {
+                $req = $this->db->prepare('SELECT * from comments WHERE id_categoria = ?');
+                $req->execute($id);
+
+                return $req->fetchAll(PDO::FETCH_OBJ);
+            }
         } else {
+            if ($elem == 'mueble') {
+                $req = $this->db->prepare('SELECT * from comments WHERE id_mueble = ? ORDER BY ?' . $order == 'ascending' ? ' ASC;' : ' DESC;');
+                $req->execute($id, $orderBy);
+
+                return $req->fetchAll(PDO::FETCH_OBJ);
+            } else {
+                $req = $this->db->prepare('SELECT * from comments WHERE id_categoria = ? ORDER BY ?' . $order == 'ascending' ? ' ASC;' : ' DESC;');
+                $req->execute($id, $orderBy);
+
+                return $req->fetchAll(PDO::FETCH_OBJ);
+            }
         }
     }
     //realmente no tiene mucho sentido traer UN solo comentario en cuanto al uso que le doy (varios comentarios en un mueble/categoría), 
     //pero lo dejo por si lo quieren probar por postman Y porque lo pide el TP
-    function getComment($elem, $id)
+    function getComment($id)
     {
-        if ($elem == 'mueble') {
-            $this->db->prepare('SELECT ');
-        } else {
-        }
+        $req = $this->db->prepare('SELECT * from comments WHERE id_comment = ?');
+        $req->execute($id);
+
+        return $req->fetch(PDO::FETCH_OBJ);
     }
     function addComment($elem, $id, $comment)
     {

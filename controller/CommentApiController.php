@@ -24,9 +24,10 @@ class CommentApiController extends ApiController
 
     function getComment($params = null,)
     {
+        $elem = $params[':elem'];
         $id = $params[':ID'];
         if (isset($id)) {
-            $comment = $this->model->getComment($id);
+            $comment = $this->model->getComment($elem, $id);
             $comment ? $this->view->response($comment, 200) : $this->view->response('No se encontró el comentario solicitado.', 404);
         } else {
             $this->view->response('No se solicitó un comentario.', 400);
@@ -52,9 +53,10 @@ class CommentApiController extends ApiController
 
     function deleteComment($params = null)
     {
+        $elem = $params[':elem'];
         $id = $params[':ID'];
         if (isset($id)) {
-            $comment = $this->model->getComment($id);
+            $comment = $this->model->getComment($elem, $id);
             if ($comment) {
                 $this->model->deleteComment($id);
                 $this->view->response($comment, 200);
