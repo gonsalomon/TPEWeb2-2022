@@ -36,8 +36,7 @@ class ApiModel
             }
         }
     }
-    //realmente no tiene mucho sentido traer UN solo comentario en cuanto al uso que le doy (varios comentarios en un mueble/categoría), 
-    //pero lo dejo por si lo quieren probar por postman Y porque lo pide el TP
+
     function getComment($id)
     {
         $req = $this->db->prepare('SELECT * from comments WHERE id_comment = ?');
@@ -45,11 +44,25 @@ class ApiModel
 
         return $req->fetch(PDO::FETCH_OBJ);
     }
+
     function addComment($elem, $id, $comment)
     {
     }
+
     //editar un comentario no tiene sentido, sólo dejo que un usuario pueda borrar los suyos propios, y un admin todos
-    function deleteComment($id_comment)
+    function deleteComment($id_comment = null, $elem = null, $id = null)
     {
+        if (!isset($elem)) {
+            $req = $this->db->prepare('DELETE FROM comments WHERE id_comment = ?');
+            $req->execute($id_comment);
+        } else {
+            if ($elem == 'mueble') {
+                $req = $this->db->prepare('DELETE * FROM comments WHERE id_mueble = ?');
+                $req->execute($id);
+            } else {
+                $req = $this->db->prepare('DELETE * FROM comments WHERE id_categoria = ?');
+                $req->execute($id);
+            }
+        }
     }
 }

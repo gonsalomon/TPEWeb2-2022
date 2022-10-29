@@ -10,6 +10,7 @@ class CommentApiController extends ApiController
         $this->model = new ApiModel();
     }
 
+    //getComments funciona tanto para obtener comentarios ordenados como para obtenerlos sin orden; en el caso de ordenados,
     //orderBy va a traer un string con el campo por el que quieren ordenar, order (también string) define si es 'ascending' o 'descending'
     function getComments($params = null, $orderBy = null, $order = null)
     {
@@ -22,7 +23,7 @@ class CommentApiController extends ApiController
         !empty($comments) ? $this->view->response($comments, 200) : $this->view->response('No hay comentarios para este elemento.', 404);
     }
 
-    function getComment($params = null,)
+    function getComment($params = null)
     {
         $elem = $params[':elem'];
         $id = $params[':ID'];
@@ -47,18 +48,21 @@ class CommentApiController extends ApiController
             $comment = $body->comment;
 
             $res = $this->model->addComment((isset($id_mueble) ? $id_mueble : $id_categoria), $comment, isset($id_mueble) ? 'mueble' : 'categoria');
+            $params[':ID'] = $this->getComments();
             $this->getComments();
         }
     }
-
+    //editar un comentario no fue necesario, voy derecho al delete
+    //puedo elegir borrar un solo comentario (paso id_comment), o todos los comentarios de un post (mueble/categoria)
     function deleteComment($params = null)
     {
         $elem = $params[':elem'];
         $id = $params[':ID'];
         if (isset($id)) {
-            $comment = $this->model->getComment($elem, $id);
+            //este es LITERALMENTE el único lugar en el que necesito obtener UN solo comentario
+            $comment = $this->model->getComment($id);
             if ($comment) {
-                $this->model->deleteComment($id);
+                $this->model->deleteComment($id, null, null);
                 $this->view->response($comment, 200);
             } else
                 $this->view->response('No se encontró el comentario solicitado.', 404);
