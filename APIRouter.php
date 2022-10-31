@@ -4,7 +4,7 @@ require_once 'controller/ApiController.php';
 
 $router = new Router();
 
-$router->addRoute('comments/:ID', 'GET', 'CommentApiController', 'getComments');
+$router->addRoute('comments', 'GET', 'CommentApiController', 'getComments');
 //no sé para qué querrías un solo comentario por su id, no tiene mucho sentido pero está ahí para la corrección del TP
 $router->addRoute('comments/:ID', 'GET', 'CommentApiController', 'getComment');
 $router->addRoute('comments', 'POST', 'CommentApiController', 'addComment');
