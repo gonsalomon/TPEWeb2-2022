@@ -5,5 +5,4 @@
 
     RewriteRule \.(?:css|js|jpe?g|gif|png)$ - [L]
     RewriteRule ^(.*)$ router.php?action=$1 [QSA,L]
-    RewriteRule ^api/(.*)$ APIRouter.php?resource=$1 [QSA,L,END]
 </IfModule>
