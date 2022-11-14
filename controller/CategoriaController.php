@@ -52,7 +52,8 @@ class CategoriaController
             $_SESSION['err'] = null;
         }
         $this->authh->checkLoggedIn();
-        $this->view->editarCategoria($this->model->getCategoria($id));
+        if ($this->model->getCategoria($id))
+            $this->view->editarCategoria($this->model->getCategoria($id));
     }
 
     function confirmEditCategoria()
@@ -61,9 +62,11 @@ class CategoriaController
             $_SESSION['err'] = null;
         }
         $this->authh->checkLoggedIn();
-        $res = $this->model->updateCategoria($_POST['id_categoria'], $_POST['categoria'], $_POST['detalles']);
-        //muestro la categoría recién editada con sus respectivos muebles
-        $this->view->mostrarCategoria($res[0], $res[1]);
+        if ($this->model->getCategoria($_POST['id_categoria'])) {
+            $res = $this->model->updateCategoria($_POST['id_categoria'], $_POST['categoria'], $_POST['detalles']);
+            //muestro la categoría recién editada con sus respectivos muebles
+            $this->view->mostrarCategoria($res[0], $res[1]);
+        }
     }
 
     function deleteCategoria($id_categoria)

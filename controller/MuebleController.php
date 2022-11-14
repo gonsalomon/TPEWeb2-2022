@@ -47,7 +47,8 @@ class MuebleController
             $_SESSION['err'] = null;
         }
         $this->authh->checkLoggedIn();
-        $this->view->editarMueble($this->model->getMueble($id), $this->model->getCategorias());
+        if ($this->model->getMueble($id))
+            $this->view->editarMueble($this->model->getMueble($id), $this->model->getCategorias());
     }
 
     function confirmEditMueble()
@@ -56,7 +57,8 @@ class MuebleController
             $_SESSION['err'] = null;
         }
         $this->authh->checkLoggedIn();
-        $this->view->mostrarMueble($this->model->updateMueble($_POST['id_mueble'], $_POST['mueble'], $_POST['descripcion'], $_POST['precio'], $_POST['id_categoria']));
+        if ($this->model->getMueble($_POST['id_mueble']))
+            $this->view->mostrarMueble($this->model->updateMueble($_POST['id_mueble'], $_POST['mueble'], $_POST['descripcion'], $_POST['precio'], $_POST['id_categoria']));
     }
     //borrar un mueble (lado N) no tiene requisitos, el checkLoggedIn ya se hizo en el router
     function deleteMueble($id)
